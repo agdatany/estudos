@@ -1,0 +1,106 @@
+@mixin titulos($color, $fontsize, $marginbotton){
+    color: $color;
+    font-size: $fontsize;
+    margin-bottom: $marginbotton;
+
+    &~ p{
+        margin-bottom: 7px;
+    }
+}
+
+h1{
+    @include titulos($cor4, 1.8em, 15px);
+}
+
+h2{
+    @include titulos(lighten($cor4, 10), 1.6em, 10px);
+    
+}
+
+h3{
+    @include titulos($cor5, 1.4em, 5px);
+}
+
+form{
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 20px;
+    label{
+        margin-top: 15px;
+        display: block;
+        &.obg:after{
+            content: ' *';
+            color: red;
+        }
+    }
+    input, select, textarea{
+        margin-top: 5px;
+        width: 100%;
+        border-radius: 5px;
+        outline: none;
+        border: 1px solid $cor1;
+        padding: 5px 10px;
+        height: 35px;
+        font-size: 1em;
+        transition-duration: 0.5s;
+        &[type="submit"], &[type="reset"]{
+            margin-top: 20px;
+            border: none;
+            background: $cor4;
+            color: white;
+            &:hover{
+                cursor: pointer;
+                background: lighten($cor4, 5);
+            }
+            &:active{
+                background: darken($cor4, 5);
+            }
+        }
+        &:focus{
+            border: 1px solid $cor4;
+            transition-duration: 0.5s;
+        }
+    }
+    textarea{
+        height: 120px;
+        resize: none;
+    }
+}
+
+table{
+    width: 100%;
+    text-align: center;
+    tr{
+        th{
+            font-size: 1.3em;
+            background: $cor4;
+            color: white;
+            font-weight: 500;
+        }
+        td{
+            font-size: 1em;
+            font-weight: 400;
+        }
+        &:nth-child(2n + 1){
+            background: lighten($cor4, 10);
+        }
+    }
+}
+
+button{
+    min-width: 200px;
+    height: 50px;
+    border-radius: 5px;
+    font-size: 1.1em;
+    margin-top: 20px;
+    border: none;
+    background: $cor4;
+    color: white;
+    &:hover{
+        cursor: pointer;
+        background: lighten($cor4, 5);
+    }
+    &:active{
+        background: darken($cor4, 5);
+    }
+}
