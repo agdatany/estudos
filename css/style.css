@@ -134,7 +134,7 @@ form label.obg:after {
   color: red;
 }
 
-form input, form select, form textarea {
+form input, form select, form textarea, form #editor {
   margin-top: 5px;
   width: 100%;
   border-radius: 5px;
@@ -147,23 +147,23 @@ form input, form select, form textarea {
           transition-duration: 0.5s;
 }
 
-form input[type="submit"], form input[type="reset"], form select[type="submit"], form select[type="reset"], form textarea[type="submit"], form textarea[type="reset"] {
+form input[type="submit"], form input[type="reset"], form select[type="submit"], form select[type="reset"], form textarea[type="submit"], form textarea[type="reset"], form #editor[type="submit"], form #editor[type="reset"] {
   margin-top: 20px;
   border: none;
   background: #F59B15;
   color: white;
 }
 
-form input[type="submit"]:hover, form input[type="reset"]:hover, form select[type="submit"]:hover, form select[type="reset"]:hover, form textarea[type="submit"]:hover, form textarea[type="reset"]:hover {
+form input[type="submit"]:hover, form input[type="reset"]:hover, form select[type="submit"]:hover, form select[type="reset"]:hover, form textarea[type="submit"]:hover, form textarea[type="reset"]:hover, form #editor[type="submit"]:hover, form #editor[type="reset"]:hover {
   cursor: pointer;
   background: #f6a52d;
 }
 
-form input[type="submit"]:active, form input[type="reset"]:active, form select[type="submit"]:active, form select[type="reset"]:active, form textarea[type="submit"]:active, form textarea[type="reset"]:active {
+form input[type="submit"]:active, form input[type="reset"]:active, form select[type="submit"]:active, form select[type="reset"]:active, form textarea[type="submit"]:active, form textarea[type="reset"]:active, form #editor[type="submit"]:active, form #editor[type="reset"]:active {
   background: #e78e0a;
 }
 
-form input:focus, form select:focus, form textarea:focus {
+form input:focus, form select:focus, form textarea:focus, form #editor:focus {
   border: 1px solid #F59B15;
   -webkit-transition-duration: 0.5s;
           transition-duration: 0.5s;
@@ -316,6 +316,45 @@ section.resumo .containers a .container {
   height: 140px;
   background: #eee;
   padding: 10px 25px;
+}
+
+section.nova-postagem .container .texto form .barra-de-ferramentas {
+  width: 100%;
+  background: #eee;
+  height: 40px;
+  padding: 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border: 1px solid #2C5178;
+  border-radius: 5px;
+}
+
+section.nova-postagem .container .texto form .barra-de-ferramentas .ferramenta {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  width: 30px;
+  height: 30px;
+  border: 1px solid #195B9F;
+  border-radius: 3px;
+  margin: 0 5px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+section.nova-postagem .container .texto form #editor {
+  height: 500px;
 }
 
 @-webkit-keyframes sobe {

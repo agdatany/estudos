@@ -86,6 +86,39 @@ section{
             }
         }
     }
+
+    &.nova-postagem{
+        .container{
+            .texto{
+                form{
+                    .barra-de-ferramentas{
+                        width: 100%;
+                        background: #eee;
+                        height: 40px;
+                        padding: 5px;
+                        display: flex;
+                        align-items: center;
+                        border: 1px solid $cor1;
+                        border-radius: 5px;
+                        .ferramenta{
+                            display: flex;
+                            align-items: center;
+                            justify-content: space-around;
+                            width: 30px;
+                            height: 30px;
+                            border: 1px solid $cor2;
+                            border-radius: 3px;
+                            margin: 0 5px;
+                            user-select: none;
+                        }
+                    }
+                    #editor{
+                        height: 500px;
+                    }
+                }
+            }
+        }
+    }
 }
 
 @keyframes sobe{

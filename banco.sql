@@ -14,6 +14,13 @@ CREATE TABLE conteudo(
     FOREIGN KEY(id_materia) REFERENCES topico(id_materia)
 );
 
+-- CREATE TABLE resumo(
+--     id_resumo INT PRIMARY KEY AUTO_INCREMENT,
+--     titulo VARCHAR(40) NOT NULL,
+--     id_conteudo INT,
+--     FOREIGN KEY(id_conteudo) REFERENCES conteudo(id_conteudo)
+-- );
+
 INSERT INTO materia VALUES (null, 'Biologia');
 INSERT INTO materia VALUES (null, 'Física');
 INSERT INTO materia VALUES (null, 'Geografia');
