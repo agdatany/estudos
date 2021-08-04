@@ -19,7 +19,6 @@
         <header>
             <nav>
                 <ul>
-                    <li><a href="home">Página inicial</a></li>
                     <li><a href="cronograma">Cronograma</a></li>
                     <li><a href="simulados">Simulados</a></li>
                     <li><a href="questoes">Questões</a></li>
