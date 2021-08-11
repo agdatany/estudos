@@ -23,7 +23,7 @@
                     <li><a href="simulados">Simulados</a></li>
                     <li><a href="questoes">Questões</a></li>
                     <li><a href="lista-de-tarefas">Lista de tarefas</a></li>
-                    <li><a href="resumos">Resumos</a></li>
+                    <li><a href="resumos-professores">Resumos</a></li>
                 </ul>
             </nav>
         </header>

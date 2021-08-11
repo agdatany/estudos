@@ -1,7 +1,3 @@
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script type='text/javascript' src='//code.jquery.com/jquery-compat-git.js'></script>
-<script type='text/javascript' src='//igorescobar.github.io/jQuery-Mask-Plugin/js/jquery.mask.min.js'></script>
-
 <section class="cronograma">
     <h1>Cronograma</h1>
     <table class="cronograma">
@@ -17,26 +13,15 @@
         </tr>
 
         <?php
-            require('php/cronograma_pegar.php');
+            require('php/cronograma_mostrar.php');
         ?>
-
-        <!-- <tr>
-            <td><div class="horario">08:00</div></td>
-            <td><div class="evento">Matemática</div></td>
-            <td><div class="evento">Estudar português e</div></td>
-            <td><div class="evento">hdusahdaisfhuidhasds</div></td>
-            <td><div class="evento">Matemática</div></td>
-            <td><div class="evento">Matemática</div></td>
-            <td><div class="evento">Matemática</div></td>
-            <td><div class="evento">Matemática</div></td>
-        </tr> -->
     </table>
 
     <div class="editar-cronograma">
         <h1>Editar cronograma</h1>
         <form id="formEditar" action="" method="POST">
             <label class="obg" for="evento">Evento:</label>
-            <input type="text" name="evento" id="evento" maxlength="20" placeholder="Nome do evento">
+            <input type="text" name="evento" id="evento" maxlength="20" placeholder="Nome do evento" required>
             <label class="obg">Dias da semana:</label>
             <div class="opcoes">
                 <div class="opcao">
@@ -69,23 +54,39 @@
                 </div>
             </div>
             <label class="obg" for="horario">Horário:</label>
-            <input type="time" name="horario" id="horario">
+            <input type="time" name="horario" id="horario" required>
             <label for="descricao">Descrição:</label>
             <input type="text" name="descricao" id="descricao" placeholder="Descrição do evento">
             <label for="notificar">Receber notificações:</label>
             <select name="notificar" id="notificar">
-                <option value="1">Sim</option>
                 <option value="0">Não</option>
+                <option value="1">Sim</option>
             </select>
+            <label for="cor">Cor de fundo do evento:</label>
+            <div class="cores">
+                <div class="cor selecionado" id="f48fb1"></div>
+                <div class="cor" id="ce93d8"></div>
+                <div class="cor" id="ef9a9a"></div>
+                <div class="cor" id="90caf9"></div>
+                <div class="cor" id="9fa8da"></div>
+                <div class="cor" id="b39ddb"></div>
+                <div class="cor" id="80cbc4"></div>
+                <div class="cor" id="b3e5fc"></div>
+                <div class="cor" id="ffcc80"></div>
+                <div class="cor" id="fff59d"></div>
+            </div>
             <div class="retorno">
             </div>
             <div class="botoes">
                 <input type="submit" id="adicionar" value="Adicionar">
                 <input type="submit" id="alterar" value="Alterar">
                 <input type="submit" id="remover" value="Remover">
+                <input type="reset" value="Limpar" id="limpar">
             </div>
         </form>
     </div>
 </section>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type='text/javascript' src='//code.jquery.com/jquery-compat-git.js'></script>
 <script src="js/cronograma.js"></script>

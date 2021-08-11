@@ -19,6 +19,8 @@ header {
   -webkit-box-pack: end;
       -ms-flex-pack: end;
           justify-content: flex-end;
+  position: fixed;
+  z-index: 1;
 }
 
 header nav ul {
@@ -47,8 +49,10 @@ header nav ul li a:hover {
 }
 
 main {
-  min-height: calc(100vh - 80px - 90px);
-  padding: 40px 60px;
+  min-height: calc(100vh - 90px);
+  padding: 100px 60px 30px 60px;
+  max-width: 1500px;
+  margin: 0 auto;
 }
 
 footer {
@@ -118,6 +122,36 @@ h3 ~ p {
   margin-bottom: 7px;
 }
 
+h4 {
+  color: #f9ab36;
+  font-size: 1.2em;
+  margin-bottom: 5px;
+}
+
+h4 ~ p {
+  margin-bottom: 7px;
+}
+
+h5 {
+  color: #f9a01d;
+  font-size: 1.1em;
+  margin-bottom: 5px;
+}
+
+h5 ~ p {
+  margin-bottom: 7px;
+}
+
+h6 {
+  color: #f69507;
+  font-size: 1em;
+  margin-bottom: 5px;
+}
+
+h6 ~ p {
+  margin-bottom: 7px;
+}
+
 form {
   width: 100%;
   margin: 0 auto;
@@ -160,12 +194,6 @@ form .opcoes .opcao label, form .opcoes .opcao input {
 
 form .opcoes .opcao label {
   margin-left: 5px;
-}
-
-form .opcoes .opcao:focus {
-  border: 9px solid black;
-  outline: 9px solid black;
-  background: red;
 }
 
 form input, form select, form textarea, form #editor {
@@ -213,6 +241,30 @@ form textarea {
   resize: none;
 }
 
+form .cores {
+  border-radius: 5px;
+  border: 1px solid #2C5178;
+  padding: 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+form .cores .cor {
+  width: 30px;
+  height: 30px;
+  background: fff;
+  margin: 5px;
+  border-radius: 5px;
+  border: 1px solid #666666;
+}
+
+form .cores .selecionado {
+  border: 2px solid black;
+}
+
 table {
   width: 100%;
   text-align: center;
@@ -258,11 +310,11 @@ button:active {
   background: #e78e0a;
 }
 
-section.resumos .container {
-  margin-bottom: 30px;
+section.resumos-professores .container {
+  margin-bottom: 25px;
 }
 
-section.resumos .container .titulo {
+section.resumos-professores .container .titulo {
   width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -283,7 +335,7 @@ section.resumos .container .titulo {
           transition-duration: 0.3s;
 }
 
-section.resumos .container .titulo i {
+section.resumos-professores .container .titulo i {
   font-size: 1.1em;
   position: relative;
   top: -3px;
@@ -291,11 +343,11 @@ section.resumos .container .titulo i {
           transition-duration: 0.3s;
 }
 
-section.resumos .container .titulo p {
+section.resumos-professores .container .titulo p {
   font-size: 1.3em;
 }
 
-section.resumos .container .desc {
+section.resumos-professores .container .desc {
   display: none;
   background: #eeeeee;
   padding: 15px;
@@ -306,22 +358,31 @@ section.resumos .container .desc {
   border-radius: 0 0 30px 30px;
 }
 
-section.resumos .container .desc ul {
+section.resumos-professores .container .desc ul {
   list-style: none;
 }
 
-section.resumos .container .desc ul a {
+section.resumos-professores .container .desc ul a {
   color: black;
   text-decoration: none;
 }
 
-section.resumos .container .desc ul a li {
+section.resumos-professores .container .desc ul a li {
   padding: 4px;
   border-radius: 5px;
 }
 
-section.resumos .container .desc ul a li:hover {
+section.resumos-professores .container .desc ul a li:hover {
   background: #ddd;
+}
+
+section.resumo {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+section.resumo ul, section.resumo ol {
+  margin-left: 35px;
 }
 
 section.erro404 {
@@ -346,19 +407,19 @@ section.erro404 .center p {
   margin-top: 1vw;
 }
 
-section.resumo .containers a {
+section.resumos .containers a {
   text-decoration: none;
-  margin: 20px;
   color: black;
 }
 
-section.resumo .containers a .container {
+section.resumos .containers a .container {
   position: relative;
   border-radius: 30px;
   width: 100%;
   height: 140px;
   background: #eee;
   padding: 10px 25px;
+  margin-top: 25px;
 }
 
 section.nova-postagem .container .texto form .barra-de-ferramentas {
@@ -410,11 +471,13 @@ section.cronograma table.cronograma tr {
 
 section.cronograma table.cronograma tr th {
   height: 40px;
+  width: 13%;
 }
 
 section.cronograma table.cronograma tr th:nth-child(1) {
   border-radius: 30px 0 0 0;
   border-right: 2px solid white;
+  width: 8%;
 }
 
 section.cronograma table.cronograma tr th:nth-last-child(1) {
@@ -437,14 +500,6 @@ section.cronograma table.cronograma tr td .evento {
 section.cronograma table.cronograma tr td:nth-child(1) {
   width: 8%;
   border-right: 2px solid white;
-}
-
-section.cronograma table.cronograma tr:nth-last-child(1) td:nth-child(1) {
-  border-radius: 0 0 0 30px;
-}
-
-section.cronograma table.cronograma tr:nth-last-child(1) td:nth-last-child(1) {
-  border-radius: 0 0 30px 0;
 }
 
 section.cronograma .editar-cronograma {
@@ -470,7 +525,7 @@ section.cronograma .editar-cronograma form .botoes {
           justify-content: center;
 }
 
-section.cronograma .editar-cronograma form .botoes input[type="submit"] {
+section.cronograma .editar-cronograma form .botoes input[type="submit"], section.cronograma .editar-cronograma form .botoes input[type="reset"] {
   max-width: 200px;
   margin: 15px 2%;
 }

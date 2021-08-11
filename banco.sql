@@ -40,6 +40,7 @@ CREATE TABLE evento(
     dia_semana CHAR(3) NOT NULL,
     horario TIME NOT NULL,
     receber_notificacao BOOLEAN DEFAULT 0,
+    cor VARCHAR(6) DEFAULT '1A508B',
     id_cronograma INT,
     FOREIGN KEY(id_cronograma) REFERENCES cronograma(id_cronograma) 
 )ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;

@@ -1,7 +1,7 @@
 section{
-    &.resumos{
+    &.resumos-professores{
         .container{
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             .titulo{
                 width: 100%;
                 display: flex;
@@ -51,6 +51,14 @@ section{
         }
     }
 
+    &.resumo{
+        max-width: 1280px;
+        margin: 0 auto;
+        ul, ol{
+            margin-left: 35px;
+        }
+    }
+
     &.erro404{
         position: absolute;
         top: 50%;
@@ -69,11 +77,10 @@ section{
         }
     }
 
-    &.resumo{
+    &.resumos{
         .containers{
             a{
                 text-decoration: none;
-                margin: 20px;
                 color: black;
                 .container{
                     position: relative;
@@ -82,6 +89,7 @@ section{
                     height: 140px;
                     background: #eee;
                     padding: 10px 25px;
+                    margin-top: 25px;
                 }
             }
         }
@@ -127,9 +135,11 @@ section{
                 height: 60px;
                 th{
                     height: 40px;
+                    width: 13%;
                     &:nth-child(1){
                         border-radius: 30px 0 0 0;
                         border-right: 2px solid white;
+                        width: 8%;
                     }
                     &:nth-last-child(1){
                         border-radius: 0 30px 0 0;
@@ -150,16 +160,6 @@ section{
                         border-right: 2px solid white;
                     }
                 }
-                &:nth-last-child(1){
-                    td{
-                        &:nth-child(1){
-                            border-radius: 0 0 0 30px;
-                        }
-                        &:nth-last-child(1){
-                            border-radius: 0 0 30px 0;
-                        }
-                    }
-                }
             }
         }
         .editar-cronograma{
@@ -177,7 +177,7 @@ section{
                 .botoes{
                     display: flex;
                     justify-content: center;
-                    input[type="submit"]{
+                    input[type="submit"], input[type="reset"]{
                         max-width: 200px;
                         margin: 15px 2%;
                     }
