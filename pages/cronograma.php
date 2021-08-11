@@ -1,6 +1,6 @@
 <section class="cronograma">
     <h1>Cronograma</h1>
-    <table class="cronograma">
+    <table class="cronograma" id="tabelaCronograma">
         <tr>
             <th>Horários</th>
             <th>Dom</th>
@@ -74,6 +74,7 @@
                 <div class="cor" id="b3e5fc"></div>
                 <div class="cor" id="ffcc80"></div>
                 <div class="cor" id="fff59d"></div>
+                <div class="cor" id="ffffff"></div>
             </div>
             <div class="retorno">
             </div>

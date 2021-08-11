@@ -1,32 +1,86 @@
+// Adicionando as cores no campo "cor de fundo do evento"
+cores = document.querySelectorAll('.cor');
+
+cores.forEach(cor => {
+    cor.style.backgroundColor = '#'+cor.id;
+});
+
 $(document).ready(function(){
-    cores = document.querySelectorAll('.cor');
-
-    cores.forEach(cor => {
-        cor.style.backgroundColor = '#'+cor.id;
-    });
-
+    // Selecionando a cor do evento
     $('.cor').click(function(e){
         if($(e.target).hasClass('selecionado')){
-            $(e.target).removeClass('selecionado');
+            $(e.target).addClass('selecionado');
         }
         else{
             $('.cor').removeClass('selecionado');
-            $(e.target).addClass('selecionado');
+            $(e.target).toggleClass('selecionado');
         }
     });
 
-    $('.evento').click(function(e){
-        var evento = ($(this).text());
+    // Clicando no evento -> coloca no formulário e mostra a descrição
+    $('#tabelaCronograma').click(function(e){
 
-        var horario = ($(this).closest("tr")).find('td:eq(0)').text();
+        if($(e.target).hasClass('evento')){
+            var horario = ($(e.target).closest("tr")).find('td:eq(0)').text();
 
-        var dia_semana = $(this).closest('table').find('th').eq($(this).parent().index()).text();
+            var dia_semana = $(e.target).closest('table').find('th').eq($(e.target).parent().index()).text();
+
+            var informacoes = {'horario' : horario, 'dia_semana': dia_semana};
+
+            $.ajax({
+                method: 'POST',
+                url: './php/cronograma_evento.php',
+                data: informacoes
+            })
+            
+            .done(function(msg){
+                try{
+                    var infoEvento = JSON.parse(msg);
+
+                    // Reseta o formulário
+                    $('#formEditar').trigger('reset');
+
+                    // Coloca o título do evento
+                    $('#evento').val(infoEvento[0].titulo);
+    
+                    // Verifica em qual dia da semana está e marca
+                    var dias_semana = ['domingo', 'segunda', 'terca', 'quarta', 'quinta', 'sexta', 'sabado'];
+
+                    dias_semana.forEach(function(dia_semana){
+                        if(dia_semana.substring(0, 3) == infoEvento[0].dia_semana){
+                            $(`input[type='checkbox']#${dia_semana}`).prop('checked', true);
+                        }
+                    });
+
+                    // Coloca o horário
+                    $('#horario').val(infoEvento[0].horario);
+                    
+                    // Coloca a descrição
+                    $('#descricao').val(infoEvento[0].descricao);
+                    
+                    // Coloca o Horário
+                    $('#notificar').val(infoEvento[0].receber_notificacao);
+
+                    // Coloca a cor de fundo
+                    $('.cor').removeClass('selecionado');
+                    $(`#${infoEvento[0].cor}`).toggleClass('selecionado');
+                }
+                catch{
+                    $(".retorno").html(msg);
+                }
+            })
+
+            .fail(function(){
+                alert("Erro de dados, tente novamente.");
+            })
+        }
+        return false;
     });
 
+    // Botão adicionar
     $('#adicionar').click(function(){
         var dados = $('#formEditar').serialize() + '&cor=' + $('.selecionado').attr('id');
 
-        
         $.ajax({
             method: 'POST',
             url: './php/cronograma_add.php',
@@ -37,7 +91,7 @@ $(document).ready(function(){
             $(".retorno").css("display", "block");
             if(msg == true){
                 $(".retorno").html("Evento adicionado com sucesso!");
-                checkTr();z
+                checkTr();
             }
             else{
                 $(".retorno").html(msg);
@@ -52,8 +106,9 @@ $(document).ready(function(){
         return false;
     });
 
+    // Botão alterar
     $('#alterar').click(function(){
-        var dados = $('#formCad').serialize();
+        var dados = $('#formEditar').serialize() + '&cor=' + $('.selecionado').attr('id');
 
         $.ajax({
             method: 'POST',
@@ -63,17 +118,26 @@ $(document).ready(function(){
 
         .done(function(msg){
             $(".retorno").css("display", "block");
-            $(".retorno").html("Evento adicionado com sucesso!");
+            if(msg == true){
+                $('.retorno').html('Evento alterado com sucesso!');
+                checkTr();
+            }
+            else{
+                $('.retorno').html(msg);
+            }
         })
         
         .fail(function(){
             $(".retorno").css("display", "block");
             $(".retorno").html("Erro de dados, tente novamente.");
         });
+
+        return false;
     });
 
+    // Botão remover
     $('#remover').click(function(){
-        var dados = $('#formCad').serialize();
+        var dados = $('#formEditar').serialize();
 
         $.ajax({
             method: 'POST',
@@ -83,20 +147,46 @@ $(document).ready(function(){
 
         .done(function(msg){
             $(".retorno").css("display", "block");
-            $(".retorno").html("Evento adicionado com sucesso!");
+            if(msg == true){
+                $(".retorno").html("Evento removido com sucesso!");
+                removerEvento();
+            }
+            else{
+                $(".retorno").html(msg);
+            }
         })
         
         .fail(function(){
             $(".retorno").css("display", "block");
             $(".retorno").html("Erro de dados, tente novamente.");
         });
+
+        return false;
     });
 
+    // Botão limpar
     $('#limpar').click(function(){
         $('.selecionado').removeClass('selecionado');
         $('.cor').eq(0).addClass('selecionado');
     });
 });
+
+// Remove o evento
+function removerEvento(){
+    var horarioValor = ($('input#horario').val()).substring(0, 5);
+    var horarioTr = $(`td:contains('${horarioValor}')`).closest('tr');
+    
+    for(let i = 0; i < 7; i++) {
+        if($(`input[type='checkbox']`).eq(i).is(':checked')){
+            var tdEvento = horarioTr.find('td').eq(i + 1);
+            tdEvento.html('-');
+        }
+    }
+
+    if(horarioTr.children('td').children('div').length == 0){
+        horarioTr.remove();
+    }
+}
 
 // Verifica qual a situação do evento e adiciona uma TR caso necessário
 function checkTr(){
