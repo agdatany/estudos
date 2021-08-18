@@ -17,201 +17,23 @@ $(document).ready(function(){
         }
     });
 
-    // Clicando no evento -> coloca no formulário e mostra a descrição
-    $('#tabelaCronograma').click(function(e){
-
-        if($(e.target).hasClass('evento')){
-            abrirModal('modal-editarCronograma');
-            
-            var horario = ($(e.target).closest("tr")).find('td:eq(0)').text();
-
-            var dia_semana = $(e.target).closest('table').find('th').eq($(e.target).parent().index()).text();
-
-            var informacoes = {'horario' : horario, 'dia_semana': dia_semana};
-
-            $.ajax({
-                method: 'POST',
-                url: './php/cronograma_evento.php',
-                data: informacoes
-            })
-            
-            .done(function(msg){
-                try{
-                    var infoEvento = JSON.parse(msg);
-
-                    // Reseta o formulário
-                    $('.formEditar').trigger('reset');
-
-                    // Coloca o título do evento
-                    $('.inpEvento').val(infoEvento[0].titulo);
-    
-                    // Verifica em qual dia da semana está e marca
-                    var dias_semana = ['domingo', 'segunda', 'terca', 'quarta', 'quinta', 'sexta', 'sabado'];
-
-                    dias_semana.forEach(function(dia_semana){
-                        if(dia_semana.substring(0, 3) == infoEvento[0].dia_semana){
-                            $(`input[type='checkbox']#${dia_semana}`).prop('checked', true);
-                        }
-                    });
-
-                    // Coloca o horário
-                    $('.inpHorario').val(infoEvento[0].horario);
-                    
-                    // Coloca a descrição
-                    $('.inpDescricao').val(infoEvento[0].descricao);
-                    
-                    // Coloca o Horário
-                    $('.inpNotificar').val(infoEvento[0].receber_notificacao);
-
-                    // Coloca a cor de fundo
-                    $('.cor').removeClass('selecionado');
-                    $(`#${infoEvento[0].cor}`).toggleClass('selecionado');
-                }
-                catch{
-                    $(".retorno").html(msg);
-                }
-            })
-
-            .fail(function(){
-                alert("Erro de dados, tente novamente.");
-            })
-        }
-        return false;
-    });
-
-    // Botão adicionar
-    $('#adicionar').click(function(){
-        var dados = $('#formEditar').serialize() + '&cor=' + $('.selecionado').attr('id');
-
-        $.ajax({
-            method: 'POST',
-            url: './php/cronograma_add.php',
-            data: dados,
-        })
-        
-        .done(function(msg){
-            $(".retorno").css("display", "block");
-            if(msg == true){
-                $(".retorno").html("Evento adicionado com sucesso!");
-                checkTr();
-            }
-            else{
-                $(".retorno").html(msg);
-            }
-        })
-        
-        .fail(function(){
-            $(".retorno").css("display", "block");
-            $(".retorno").html("Erro de dados, tente novamente.");
-        });
-
-        return false;
-    });
-
-    // Botão alterar
-    $('#alterar').click(function(){
-        var dados = $('#formEditar').serialize() + '&cor=' + $('.selecionado').attr('id');
-
-        $.ajax({
-            method: 'POST',
-            url: 'php/cronograma_alterar.php',
-            data: dados,
-        })
-
-        .done(function(msg){
-            $(".retorno").css("display", "block");
-            if(msg == true){
-                $('.retorno').html('Evento alterado com sucesso!');
-                checkTr();
-            }
-            else{
-                $('.retorno').html(msg);
-            }
-        })
-        
-        .fail(function(){
-            $(".retorno").css("display", "block");
-            $(".retorno").html("Erro de dados, tente novamente.");
-        });
-
-        return false;
-    });
-
-    // Botão remover
-    $('#remover').click(function(){
-        var dados = $('#formEditar').serialize();
-
-        $.ajax({
-            method: 'POST',
-            url: 'php/cronograma_excluir.php',
-            data: dados,
-        })
-
-        .done(function(msg){
-            $(".retorno").css("display", "block");
-            if(msg == true){
-                $(".retorno").html("Evento removido com sucesso!");
-                removerEvento();
-            }
-            else{
-                $(".retorno").html(msg);
-            }
-        })
-        
-        .fail(function(){
-            $(".retorno").css("display", "block");
-            $(".retorno").html("Erro de dados, tente novamente.");
-        });
-
-        return false;
-    });
-
     // Botão limpar
     $('#limpar').click(function(){
         $('.selecionado').removeClass('selecionado');
         $('.cor').eq(0).addClass('selecionado');
     });
 
-    // Resetar cronograma -> Fazer depois*
-    $('.resetarCronograma').click(function(){
-        abrirModal('modal-resetar');
-    });
-
-    $('#confirmaResetarCronograma').click(function(){
-        var contaUsuario = 1;
-
-        $.ajax({
-            method: 'POST',
-            url: 'php/cronograma_resetar.php',
-            data: contaUsuario,
-        })
-
-        .done(function(msg){
-            if(msg == true){
-                resetarCronograma();
-            }
-            else{
-                alert('Erro encontrado, tente novamente mais tarde!');
-            }
-        })
-        
-        .fail(function(){
-            alert("Erro de dados, tente novamente.");
-        });
-
-        return false;
+    $('#resetarCronograma').click(function(){
+        fechaModal();
+        abreModal('modal-resetar');
     });
 
     $('.cancelarModal').click(function(){
-        fecharModal();
+        fechaModal();
     });
 
-    $('.fundo').click(function(){
-        fecharModal();
-    });
-
-    $('#adicionar-evento').click(function(){
-        abrirModal('modal-editarCronograma');
+    $('.btnAdicionarEvento').click(function(){
+        abreModal('modal-editar');
     });
 });
 
@@ -228,7 +50,12 @@ function removerEvento(){
     }
 
     if(horarioTr.children('td').children('div').length == 0){
-        horarioTr.remove();
+        if(horarioValor == "23:59"){
+            $(`td:contains('${horarioValor}')`).closest('tr').addClass('none');
+        }
+        else{
+            horarioTr.remove();
+        }
     }
 }
 
@@ -264,6 +91,10 @@ function editarTr(horario){
     horario = transformaStringHorario(horario);
     var tr = $(`td:contains('${horario}')`).closest('tr');
 
+    if(horario == "23:59"){
+        $(`td:contains('${horario}')`).closest('tr').removeClass('none');
+    }
+
     for(let i = 0; i < 7; i++) {
         if($(`input[type='checkbox']`).eq(i).is(':checked')){
             tr.find('td').eq(i + 1).html('');
@@ -274,8 +105,9 @@ function editarTr(horario){
 
 // Adiciona a Tr com o evento
 function adicionarTr(novoHorario, horario){
-    novoHorario = transformaStringHorario(novoHorario);
     horario = transformaStringHorario(horario);
+    novoHorario = transformaStringHorario(novoHorario);
+
     var novaTr = $(`td:contains('${horario}')`).closest('tr').prev().after(`<tr><td class='td-horario'>${novoHorario}</td></tr>`);
 
     for(let i = 0; i < 7; i++) {
@@ -304,27 +136,20 @@ function transformaStringHorario(horario){
     return horarioString;
 }
 
-function resetarCronograma(){
-    $('tbody').remove();
-    $('table').append("<tr><td colspan='8' id='nenhum-evento' style='border-radius: 0 0 30px 30px'>Nenhum evento por enquanto!</td></tr>");
-}
+function abreModal(classeModal){
+    $(`.${classeModal}`).removeClass('none');
 
-function abrirModal(classeDaModal){
-    $('.fundo').toggleClass('none');
-    $('.fundo').toggleClass('flex');
-    
-    $(`.${classeDaModal}`).toggleClass('none');
-    $(`.${classeDaModal}`).toggleClass('flex');
+    $(`.fundo-modal`).removeClass('none');
 
     $('body').css('overflow', 'hidden');
 }
 
-function fecharModal(){
-    $('.fundo').addClass('none');
-    $('.fundo').removeClass('flex');
-    
-    $('.modal').addClass('none');
-    $('.modal').removeClass('flex');
-    
+function fechaModal(){
+    $(`.modal`).addClass('none');
+
+    $(`.fundo-modal`).addClass('none');
+
     $('body').css('overflow', 'auto');
+
+    $('.retorno').css('display', 'none');
 }

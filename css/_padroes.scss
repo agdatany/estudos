@@ -77,7 +77,7 @@ form{
             border: none;
             background: $cor4;
             color: white;
-            &:hover, &:focus{
+            &:hover{
                 cursor: pointer;
                 background: lighten($cor4, 5);
             }
@@ -99,7 +99,6 @@ form{
         resize: none;
     }
     .cores{
-        margin-bottom: 10px;
         border-radius: 5px;
         border: 1px solid $cor1;
         padding: 5px;
@@ -158,4 +157,29 @@ button{
     &:active{
         background: darken($cor4, 5);
     }
+}
+
+.fundo-modal{
+    background: rgba(0, 0, 0, 0.6);
+    position: fixed;
+    inset: 0;
+    z-index: 6;
+}
+
+.modal{
+    max-width: 70%;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 5px;
+    z-index: 7;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.none{
+    display: none !important;
 }

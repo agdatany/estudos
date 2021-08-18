@@ -50,6 +50,7 @@ section{
             }
         }
     }
+
     &.resumo{
         max-width: 1280px;
         margin: 0 auto;
@@ -57,6 +58,7 @@ section{
             margin-left: 35px;
         }
     }
+
     &.erro404{
         position: absolute;
         top: 50%;
@@ -74,6 +76,7 @@ section{
             }
         }
     }
+
     &.resumos{
         .containers{
             a{
@@ -91,6 +94,7 @@ section{
             }
         }
     }
+
     &.nova-postagem{
         .container{
             .texto{
@@ -123,56 +127,8 @@ section{
             }
         }
     }
+
     &.cronograma{
-        .fundo{
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.6);
-            z-index: 1;
-        }
-        .none{
-            display: none;
-        }
-        .flex{
-            display: flex;
-        }
-        .modal{
-            max-height: 80vh;
-            padding: 30px;
-            min-height: 300px;
-            min-width: 400px;
-            z-index: 2;
-            position: fixed;
-            border-radius: 25px;
-            background: #eee;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            flex-direction: column;
-            overflow: auto;
-            p{
-                margin: 10px;
-            }
-            button{
-                margin: 10px 5%;
-            }
-        }
-        .modal-resetar{
-            text-align: center;
-        }
-        .modal-editarCronograma{
-            h1{
-                text-align: center;
-            }
-            button{
-                height: 35px;
-                max-width: 200px;
-                margin: 10px 2%;
-            }
-        }
         table.cronograma{
             border-collapse: collapse;
             tr{
@@ -207,7 +163,6 @@ section{
             }
         }
         .editar-cronograma{
-            margin-top: 30px;
             .retorno{
                 width: 100%;
                 background: rgba($cor4, .6);
@@ -220,16 +175,39 @@ section{
             form{
                 .botoes{
                     display: flex;
-                    justify-content: center;
                     flex-wrap: wrap;
-                    input[type="submit"], input[type="reset"]{
+                    justify-content: center;
+                    input[type="submit"], input[type="reset"], button{
                         max-width: 200px;
                         margin: 10px 2%;
+                        height: 40px;
                     }
-                    .resetarCronograma{
+                    #resetarCronograma{
                         background-color: darken($cor4, 10);
                     }
                 }
+            }
+        }
+        .modal-resetar{
+            text-align: center;
+            span{
+                margin: 10px;
+            }
+        }
+        .modal-editar{
+            max-height: 80vh;
+            overflow: auto;
+        }
+        .btnAdicionarEvento{
+            min-width: 0;
+            width: 80px;
+            height: 80px;
+            position: fixed;
+            bottom: 110px;
+            right: 50px;
+            border-radius: 50%;
+            i{
+                font-size: 1.5em;
             }
         }
     }

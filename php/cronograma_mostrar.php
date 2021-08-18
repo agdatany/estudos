@@ -26,12 +26,6 @@
         }
     }
 
-    echo "<tr style='display: none'><td class='td-horario'>23:59</td>";
-    for($cont = 0; $cont < 7; $cont++){
-        echo "<td>-</td>";
-    }
-    echo "</tr>";
-
     function checkEvento($conexao, $horario, $diaSemana){
         $comando = $conexao->prepare("SELECT horario, dia_semana FROM evento WHERE horario = '$horario' AND dia_semana = '$diaSemana'");
 

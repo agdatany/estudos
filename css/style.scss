@@ -20,7 +20,7 @@ header{
     align-items: center;
     justify-content: flex-end;
     position: fixed;
-    z-index: 50;
+    z-index: 4;
     nav{
         ul{
             display: flex;
@@ -78,4 +78,4 @@ footer{
     background: #666;
 }
 
-@import 'padroes', 'paginas';
+@import 'padroes', 'paginas', 'responsivo';
