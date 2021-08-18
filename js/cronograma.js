@@ -21,6 +21,8 @@ $(document).ready(function(){
     $('#tabelaCronograma').click(function(e){
 
         if($(e.target).hasClass('evento')){
+            abrirModal('modal-editarCronograma');
+            
             var horario = ($(e.target).closest("tr")).find('td:eq(0)').text();
 
             var dia_semana = $(e.target).closest('table').find('th').eq($(e.target).parent().index()).text();
@@ -38,10 +40,10 @@ $(document).ready(function(){
                     var infoEvento = JSON.parse(msg);
 
                     // Reseta o formulário
-                    $('#formEditar').trigger('reset');
+                    $('.formEditar').trigger('reset');
 
                     // Coloca o título do evento
-                    $('#evento').val(infoEvento[0].titulo);
+                    $('.inpEvento').val(infoEvento[0].titulo);
     
                     // Verifica em qual dia da semana está e marca
                     var dias_semana = ['domingo', 'segunda', 'terca', 'quarta', 'quinta', 'sexta', 'sabado'];
@@ -53,13 +55,13 @@ $(document).ready(function(){
                     });
 
                     // Coloca o horário
-                    $('#horario').val(infoEvento[0].horario);
+                    $('.inpHorario').val(infoEvento[0].horario);
                     
                     // Coloca a descrição
-                    $('#descricao').val(infoEvento[0].descricao);
+                    $('.inpDescricao').val(infoEvento[0].descricao);
                     
                     // Coloca o Horário
-                    $('#notificar').val(infoEvento[0].receber_notificacao);
+                    $('.inpNotificar').val(infoEvento[0].receber_notificacao);
 
                     // Coloca a cor de fundo
                     $('.cor').removeClass('selecionado');
@@ -169,6 +171,48 @@ $(document).ready(function(){
         $('.selecionado').removeClass('selecionado');
         $('.cor').eq(0).addClass('selecionado');
     });
+
+    // Resetar cronograma -> Fazer depois*
+    $('.resetarCronograma').click(function(){
+        abrirModal('modal-resetar');
+    });
+
+    $('#confirmaResetarCronograma').click(function(){
+        var contaUsuario = 1;
+
+        $.ajax({
+            method: 'POST',
+            url: 'php/cronograma_resetar.php',
+            data: contaUsuario,
+        })
+
+        .done(function(msg){
+            if(msg == true){
+                resetarCronograma();
+            }
+            else{
+                alert('Erro encontrado, tente novamente mais tarde!');
+            }
+        })
+        
+        .fail(function(){
+            alert("Erro de dados, tente novamente.");
+        });
+
+        return false;
+    });
+
+    $('.cancelarModal').click(function(){
+        fecharModal();
+    });
+
+    $('.fundo').click(function(){
+        fecharModal();
+    });
+
+    $('#adicionar-evento').click(function(){
+        abrirModal('modal-editarCronograma');
+    });
 });
 
 // Remove o evento
@@ -230,7 +274,6 @@ function editarTr(horario){
 
 // Adiciona a Tr com o evento
 function adicionarTr(novoHorario, horario){
-    console.log(`style="background-color: #${$('.selecionado').attr("id")}>`);
     novoHorario = transformaStringHorario(novoHorario);
     horario = transformaStringHorario(horario);
     var novaTr = $(`td:contains('${horario}')`).closest('tr').prev().after(`<tr><td class='td-horario'>${novoHorario}</td></tr>`);
@@ -259,4 +302,29 @@ function transformaStringHorario(horario){
     }
     horarioString = horarioString.substring(0,2) + ':' + horarioString.substring(2,5);
     return horarioString;
+}
+
+function resetarCronograma(){
+    $('tbody').remove();
+    $('table').append("<tr><td colspan='8' id='nenhum-evento' style='border-radius: 0 0 30px 30px'>Nenhum evento por enquanto!</td></tr>");
+}
+
+function abrirModal(classeDaModal){
+    $('.fundo').toggleClass('none');
+    $('.fundo').toggleClass('flex');
+    
+    $(`.${classeDaModal}`).toggleClass('none');
+    $(`.${classeDaModal}`).toggleClass('flex');
+
+    $('body').css('overflow', 'hidden');
+}
+
+function fecharModal(){
+    $('.fundo').addClass('none');
+    $('.fundo').removeClass('flex');
+    
+    $('.modal').addClass('none');
+    $('.modal').removeClass('flex');
+    
+    $('body').css('overflow', 'auto');
 }

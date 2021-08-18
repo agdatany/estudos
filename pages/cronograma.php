@@ -1,27 +1,15 @@
 <section class="cronograma">
-    <h1>Cronograma</h1>
-    <table class="cronograma" id="tabelaCronograma">
-        <tr>
-            <th>Horários</th>
-            <th>Dom</th>
-            <th>Seg</th>
-            <th>Ter</th>
-            <th>Qua</th>
-            <th>Qui</th>
-            <th>Sex</th>
-            <th>Sab</th>
-        </tr>
-
-        <?php
-            require('php/cronograma_mostrar.php');
-        ?>
-    </table>
-
-    <div class="editar-cronograma">
+    <div class="modal modal-resetar none">
+        <p>Tem certeza que deseja resetar seu cronograma?</p>
+        <p style="font-weight: bold;">Atenção: essa ação será permanente e não será possível recuperar o cronograma!</p>
+        <button id="confirmaResetarCronograma">Sim, desejo limpar meu cronograma</button>
+        <button class="cancelarModal">Cancelar</button>
+    </div>
+    <div class="editar-cronograma modal modal-editarCronograma none">
         <h1>Editar cronograma</h1>
-        <form id="formEditar" action="" method="POST">
+        <form id="formEditar" class="formEditar" action="" method="POST">
             <label class="obg" for="evento">Evento:</label>
-            <input type="text" name="evento" id="evento" maxlength="20" placeholder="Nome do evento" required>
+            <input type="text" name="evento" id="evento" class="inpEvento" maxlength="20" placeholder="Nome do evento" required>
             <label class="obg">Dias da semana:</label>
             <div class="opcoes">
                 <div class="opcao">
@@ -54,11 +42,11 @@
                 </div>
             </div>
             <label class="obg" for="horario">Horário:</label>
-            <input type="time" name="horario" id="horario" required>
+            <input type="time" name="horario" id="horario" class="inpHorario" step="60" required>
             <label for="descricao">Descrição:</label>
-            <input type="text" name="descricao" id="descricao" placeholder="Descrição do evento">
+            <input type="text" name="descricao" id="descricao" class="inpDescricao" placeholder="Descrição do evento">
             <label for="notificar">Receber notificações:</label>
-            <select name="notificar" id="notificar">
+            <select name="notificar" id="notificar" class="inpNotificar">
                 <option value="0">Não</option>
                 <option value="1">Sim</option>
             </select>
@@ -83,9 +71,33 @@
                 <input type="submit" id="alterar" value="Alterar">
                 <input type="submit" id="remover" value="Remover">
                 <input type="reset" value="Limpar" id="limpar">
+                <input type="reset" value="Resetar cronograma" class="resetarCronograma">
+                <button type="button" class="cancelarModal">Fechar menu</button>
             </div>
         </form>
     </div>
+    <div class="fundo none"></div>
+    <h1>Cronograma</h1>
+    <table class="cronograma" id="tabelaCronograma">
+        <thead>
+            <tr>
+                <th>Horários</th>
+                <th>Dom</th>
+                <th>Seg</th>
+                <th>Ter</th>
+                <th>Qua</th>
+                <th>Qui</th>
+                <th>Sex</th>
+                <th>Sab</th>
+            </tr>
+        </thead>
+
+        <?php
+            require('php/cronograma_mostrar.php');
+        ?>
+    </table>
+
+    <button id="adicionar-evento"><i class="fas fa-plus"></i></button>
 </section>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

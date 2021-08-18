@@ -220,7 +220,7 @@ form input[type="submit"], form input[type="reset"], form select[type="submit"],
   color: white;
 }
 
-form input[type="submit"]:hover, form input[type="reset"]:hover, form select[type="submit"]:hover, form select[type="reset"]:hover, form textarea[type="submit"]:hover, form textarea[type="reset"]:hover, form #editor[type="submit"]:hover, form #editor[type="reset"]:hover {
+form input[type="submit"]:hover, form input[type="submit"]:focus, form input[type="reset"]:hover, form input[type="reset"]:focus, form select[type="submit"]:hover, form select[type="submit"]:focus, form select[type="reset"]:hover, form select[type="reset"]:focus, form textarea[type="submit"]:hover, form textarea[type="submit"]:focus, form textarea[type="reset"]:hover, form textarea[type="reset"]:focus, form #editor[type="submit"]:hover, form #editor[type="submit"]:focus, form #editor[type="reset"]:hover, form #editor[type="reset"]:focus {
   cursor: pointer;
   background: #f6a52d;
 }
@@ -246,6 +246,7 @@ form textarea {
 }
 
 form .cores {
+  margin-bottom: 10px;
   border-radius: 5px;
   border: 1px solid #2C5178;
   padding: 5px;
@@ -465,6 +466,68 @@ section.nova-postagem .container .texto form #editor {
   height: 500px;
 }
 
+section.cronograma .fundo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1;
+}
+
+section.cronograma .none {
+  display: none;
+}
+
+section.cronograma .flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+section.cronograma .modal {
+  max-height: 80vh;
+  padding: 30px;
+  min-height: 300px;
+  min-width: 400px;
+  z-index: 2;
+  position: fixed;
+  border-radius: 25px;
+  background: #eee;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  overflow: auto;
+}
+
+section.cronograma .modal p {
+  margin: 10px;
+}
+
+section.cronograma .modal button {
+  margin: 10px 5%;
+}
+
+section.cronograma .modal-resetar {
+  text-align: center;
+}
+
+section.cronograma .modal-editarCronograma h1 {
+  text-align: center;
+}
+
+section.cronograma .modal-editarCronograma button {
+  height: 35px;
+  max-width: 200px;
+  margin: 10px 2%;
+}
+
 section.cronograma table.cronograma {
   border-collapse: collapse;
 }
@@ -527,11 +590,17 @@ section.cronograma .editar-cronograma form .botoes {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
 }
 
 section.cronograma .editar-cronograma form .botoes input[type="submit"], section.cronograma .editar-cronograma form .botoes input[type="reset"] {
   max-width: 200px;
-  margin: 15px 2%;
+  margin: 10px 2%;
+}
+
+section.cronograma .editar-cronograma form .botoes .resetarCronograma {
+  background-color: #ce7f09;
 }
 
 @-webkit-keyframes sobe {
