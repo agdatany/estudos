@@ -79,7 +79,20 @@
     </div>
 
     <div class="fundo-modal cancelarModal none"></div>
+
     <h1>Cronograma</h1>
+    <div class="selecionarDia">
+        <label for="selecionaDia">Selecione um dia da semana:</label>
+        <select name="selecionaDia" id="selecionaDia">
+            <option value="domingo">Domingo</option>
+            <option value="segunda">Segunda</option>
+            <option value="terca">Terça</option>
+            <option value="quarta">Quarta</option>
+            <option value="quinta">Quinta</option>
+            <option value="sexta">Sexta</option>
+            <option value="sabado">Sábado</option>
+        </select>
+    </div>
     <table class="cronograma" id="tabelaCronograma">
         <thead>
             <tr>

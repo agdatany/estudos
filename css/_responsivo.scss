@@ -1,3 +1,20 @@
+@media screen and (max-width: 1366px){
+    section.cronograma{
+        .selecionarDia{
+            display: block;
+        }
+        table{
+            thead{
+                th{
+                    &:nth-child(n + 1){
+                        border-radius: 0 30px 0 0;
+                    }
+                }
+            }
+        }
+    }
+}
+
 @media screen and (max-width: 800px){
     form{
         .opcoes{

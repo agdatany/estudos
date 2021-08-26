@@ -35,7 +35,79 @@ $(document).ready(function(){
     $('.btnAdicionarEvento').click(function(){
         abreModal('modal-editar');
     });
+
+    if($(window).width() < 1366){
+        removeDiaSemana(1);
+    }
+
+    $(window).resize(function(){
+        if($(window).width() < 1366){
+            dia = $('#selecionaDia').val();
+            dias = ['domingo', 'segunda', 'terca', 'quarta', 'quinta', 'sexta', 'sabado'];
+            index = dias.indexOf(dia) + 1;
+            if(index == 0){
+                index = 1;
+            }
+            removeDiaSemana(index);
+        }
+        else{
+            apareceDiaSemana();
+        }
+    });
+
+    $('#selecionaDia').change(function(){
+        switch($(this).val()){
+            case 'domingo':
+                removeDiaSemana(1);
+                break;
+            
+            case 'segunda':
+                removeDiaSemana(2);
+                break;
+            
+            case 'terca':
+                removeDiaSemana(3);
+                break;
+            
+            case 'quarta':
+                removeDiaSemana(4);
+                break;
+            
+            case 'quinta':
+                removeDiaSemana(5);
+                break;
+            
+            case 'sexta':
+                removeDiaSemana(6);
+                break;
+            
+            case 'sabado':
+                removeDiaSemana(7);
+                break;
+        }
+    });
 });
+
+// Função para ativar a responsividade da tabela
+function removeDiaSemana(diaSemana){
+    for (let i = 1; i < 8; i++) {
+        if(i != diaSemana){
+            $('tr').find(`th:eq(${i})`).addClass('none');
+            $('tr').find(`td:eq(${i})`).addClass('none');
+        }
+        else{
+            $('tr').find(`th:eq(${i})`).removeClass('none');
+            $('tr').find(`td:eq(${i})`).removeClass('none');
+        }
+    }
+}
+
+function apareceDiaSemana(){
+    for (let i = 1; i < 8; i++) {
+        $('tr').find(`th:eq(${i})`).removeClass('none');
+        $('tr').find(`td:eq(${i})`).removeClass('none');
+    }
+}
 
 // Remove o evento
 function removerEvento(){

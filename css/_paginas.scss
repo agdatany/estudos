@@ -129,6 +129,42 @@ section{
     }
 
     &.cronograma{
+        .selecionarDia{
+            display: none;
+            margin-bottom: 30px;
+            select{
+                margin-top: 5px;
+                width: 100%;
+                border-radius: 5px;
+                outline: none;
+                border: 1px solid $cor1;
+                padding: 5px 10px;
+                height: 35px;
+                font-size: 1em;
+                transition-duration: 0.5s;
+                &[type="submit"], &[type="reset"]{
+                    margin-top: 20px;
+                    border: none;
+                    background: $cor4;
+                    color: white;
+                    &:hover{
+                        cursor: pointer;
+                        background: lighten($cor4, 5);
+                    }
+                    &:active{
+                        background: darken($cor4, 5);
+                    }
+                }
+                &[type="checkbox"]{
+                    height: 20px;
+                    width: 20px;
+                }
+                &:focus{
+                    border: 1px solid $cor4;
+                    transition-duration: 0.5s;
+                }
+            }
+        }
         table.cronograma{
             border-collapse: collapse;
             tr{

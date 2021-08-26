@@ -496,6 +496,51 @@ section.nova-postagem .container .texto form #editor {
   height: 500px;
 }
 
+section.cronograma .selecionarDia {
+  display: none;
+  margin-bottom: 30px;
+}
+
+section.cronograma .selecionarDia select {
+  margin-top: 5px;
+  width: 100%;
+  border-radius: 5px;
+  outline: none;
+  border: 1px solid #2C5178;
+  padding: 5px 10px;
+  height: 35px;
+  font-size: 1em;
+  -webkit-transition-duration: 0.5s;
+          transition-duration: 0.5s;
+}
+
+section.cronograma .selecionarDia select[type="submit"], section.cronograma .selecionarDia select[type="reset"] {
+  margin-top: 20px;
+  border: none;
+  background: #F59B15;
+  color: white;
+}
+
+section.cronograma .selecionarDia select[type="submit"]:hover, section.cronograma .selecionarDia select[type="reset"]:hover {
+  cursor: pointer;
+  background: #f6a52d;
+}
+
+section.cronograma .selecionarDia select[type="submit"]:active, section.cronograma .selecionarDia select[type="reset"]:active {
+  background: #e78e0a;
+}
+
+section.cronograma .selecionarDia select[type="checkbox"] {
+  height: 20px;
+  width: 20px;
+}
+
+section.cronograma .selecionarDia select:focus {
+  border: 1px solid #F59B15;
+  -webkit-transition-duration: 0.5s;
+          transition-duration: 0.5s;
+}
+
 section.cronograma table.cronograma {
   border-collapse: collapse;
 }
@@ -680,6 +725,15 @@ section.cronograma .btnAdicionarEvento i {
   100% {
     left: 0;
     opacity: 1;
+  }
+}
+
+@media screen and (max-width: 1366px) {
+  section.cronograma .selecionarDia {
+    display: block;
+  }
+  section.cronograma table thead th:nth-child(n + 1) {
+    border-radius: 0 30px 0 0;
   }
 }
 
